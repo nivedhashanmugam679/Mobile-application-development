@@ -1,0 +1,140 @@
+XML code-
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MAD Lab in CMRU"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.094" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Size"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Color"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Font"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+</android.support.constraint.ConstraintLayout>
+
+
+
+Java code-
+package com.example.example;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
+import android.view.View;
+import android.view.View.OnClickListener;
+public class MainActivity extends AppCompatActivity {
+    float font = 20;
+    int count = 1;
+    Button b1,b2,b3;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        final TextView t1 = (TextView) findViewById(R.id.textView);
+        t1.setTextSize(15);
+        b1 = (Button) findViewById(R.id.button);
+        b1.setOnClickListener(new OnClickListener() {
+            public void onClick(View view) {
+                t1.setTextSize(font);
+                font = font + 5;
+                if (font == 50)
+                    font = 20;
+            }
+        });
+        b2 = (Button) findViewById(R.id.button2);
+        b2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (count) {
+                    case 1:
+                        t1.setTextColor(Color.parseColor("#7f00ff"));
+                        break;
+                    case 2:
+                        t1.setTextColor(Color.parseColor("#00FF00"));
+                        break;
+                    case 3:
+                        t1.setTextColor(Color.parseColor("#FF0000"));
+                        break;
+                    case 4:
+                        t1.setTextColor(Color.parseColor("#0000FF"));
+                        break;
+                    case 5:
+                        t1.setTextColor(Color.parseColor("#000FFF"));
+                        break;
+                }
+                count++;
+                if (count == 6)
+                    count = 1;
+            }
+        });
+        b3 = (Button) findViewById(R.id.button3);
+        b3.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (count) {
+                    case 1:
+                        t1.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+                        break;
+                    case 2:
+                        t1.setTypeface(Typeface.MONOSPACE, Typeface.NORMAL);
+                        break;
+                    case 3:
+                        t1.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                        break;
+                    case 4:
+                        t1.setTypeface(Typeface.SERIF, Typeface.BOLD_ITALIC);
+                        break;
+                }
+                count++;
+                if (count == 5)
+                    count = 1;
+            }
+        });
+
+    }
+}
+
+
